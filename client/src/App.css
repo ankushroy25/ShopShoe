@@ -6,3 +6,21 @@
     radial-gradient(at 59% 52%, #eefadc 0px, transparent 50%),
     radial-gradient(at 98% 30%, #d0d8f7 0px, transparent 50%);
 }
+.carousel-container {
+  display: flex;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  animation: moveCarousel 45s linear infinite; /* Adjust duration as needed */
+}
+
+@keyframes moveCarousel {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%); /* Move one item width to the left */
+  }
+}

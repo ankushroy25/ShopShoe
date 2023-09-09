@@ -4,6 +4,8 @@ import Footer from "./components/Footer.jsx";
 import Homepage from "./pages/Homepage.jsx";
 import Products from "./pages/Products.jsx";
 import ProductDetail from "./pages/ProductDetail.jsx";
+import Checkout from "./pages/Checkout.jsx";
+
 import Cart from "./pages/Cart.jsx";
 import "./App.css";
 
@@ -25,7 +27,7 @@ function App() {
 
               <Route path="/cart" element={<Cart />} />
               <Route path="/about" />
-              <Route path="/checkout" />
+              <Route path="/checkout" element={<Checkout />} />
             </Routes>
             <Footer />
           </Router>

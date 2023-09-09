@@ -28,7 +28,6 @@ const CartItem = (props) => {
               <p className="text-sm font-medium text-gray-500">Company</p>
               <p className="text-2xl font-medium text-gray-600">{company}</p>
             </div>
-            <div className=""></div>
           </div>
           <div className="mb-3"></div>
           <div className="flex justify-start space-x-2 m-4">

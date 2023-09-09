@@ -131,11 +131,11 @@ const Products = () => {
                   </div>
                   <div className="flex justify-between mt-2 text-xl ">
                     <p>
-                      <span class="text-2xl font-bold text-slate-900">
-                        $249
+                      <span className="text-2xl font-bold text-slate-900">
+                        ${item.newPrice}
                       </span>
-                      <span class="text-sm text-slate-900 line-through">
-                        $299
+                      <span className="text-sm text-slate-900 line-through">
+                        ${item.prevPrice}
                       </span>
                     </p>
                     <button
