@@ -7,11 +7,12 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { RiAccountCircleFill, RiShoppingCart2Line } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const settings = ["Profile", "Logout"];
 
@@ -36,13 +37,14 @@ function Navbar() {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" className="bg-gray-900">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography variant="h6" noWrap component="a" href="/">
-            LOGO
-          </Typography>
-
+          <Link to="/">
+            <Typography variant="h5" noWrap component="div">
+              ShopShoe
+            </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -72,54 +74,70 @@ function Navbar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem href="/products" onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Products</Typography>
-              </MenuItem>
-              <MenuItem href="/about" onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">About</Typography>
-              </MenuItem>
+              <Link to="/products">
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Products</Typography>
+                </MenuItem>
+              </Link>
+              <Link to="/about">
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">About</Typography>
+                </MenuItem>
+              </Link>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
+          <Link to="/">
+            <Typography
+              variant="h5"
+              noWrap
+              component="div"
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              ShopShoe
+            </Typography>
+          </Link>
+          <Box
+            className="flex justify-center"
+            sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
           >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
-              href="/products"
-              onClick={handleCloseNavMenu}
-              sx={{ m: 2, color: "white", display: "block" }}
-            >
-              Products
-            </Button>
-            <Button
-              href="/about"
-              onClick={handleCloseNavMenu}
-              sx={{ m: 2, color: "white", display: "block" }}
-            >
-              About
-            </Button>
+            <Link to="/products">
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ m: 2, color: "white", display: "block" }}
+              >
+                Products
+              </Button>
+            </Link>
+            <Link to="/about">
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ m: 2, color: "white", display: "block" }}
+              >
+                About
+              </Button>
+            </Link>
           </Box>
-
+          <Link to="/cart">
+            <IconButton>
+              <span className="mr-2">
+                <RiShoppingCart2Line size={40} color="white" />
+              </span>
+            </IconButton>
+          </Link>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <RiAccountCircleFill size={40} color="white" />
               </IconButton>
             </Tooltip>
             <Menu

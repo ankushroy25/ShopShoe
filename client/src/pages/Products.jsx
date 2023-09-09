@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import data from "../data.js";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TablePagination from "@mui/material/TablePagination";
 import { AiFillStar } from "react-icons/ai";
+import ProductFilters from "../components/ProductFilters.jsx"; // Import the filter component
+import { Link } from "react-router-dom";
+import { ShopContext } from "../context/ShopContext.jsx";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 const Products = () => {
   const [page, setPage] = useState(0);
@@ -13,6 +17,7 @@ const Products = () => {
   const [selectedRating, setSelectedRating] = useState("All");
   const [sortingOrder, setSortingOrder] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const { addToCart } = useContext(ShopContext);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -81,119 +86,69 @@ const Products = () => {
 
   return (
     <div className="py-8 px-16">
-      <div className="py-4 mb-4 mx-auto lg:flex lg:flex-row justify-center shadow-gray-400 shadow-md bg-slate-300 rounded-md">
-        <p className="flex justify-center mt-3 mr-4 font-semibold text-2xl">
+      <div className="py-4 mb-4 mx-auto lg:flex lg:flex-row justify-center shadow-gray-400 shadow-md bg-slate-600  rounded-md">
+        <p className="text-white flex justify-center mt-3 mr-4 font-semibold text-2xl">
           Filter
         </p>
 
-        {/* On small screens, stack elements vertically */}
-        <div className="flex flex-col md:flex-row items-center">
-          {/* Search input field */}
-          <span className="m-2 lg:mb-0 lg:mr-4">
-            <input
-              type="text"
-              placeholder="Search products"
-              value={searchQuery}
-              onChange={handleSearchChange}
-              className="px-4 py-2 border rounded-md"
-            />
-          </span>
-
-          {/* Color filter dropdown */}
-          <span className="m-2 lg:mb-0 lg:mr-4">
-            <select
-              value={selectedColor}
-              onChange={handleColorChange}
-              className="px-4 py-2 border rounded-md"
-            >
-              <option value="All">All Colors</option>
-              {colorOptions.map((color, index) => (
-                <option key={index} value={color}>
-                  {color}
-                </option>
-              ))}
-            </select>
-          </span>
-
-          {/* Sorting filter dropdown */}
-          <span className="m-2 lg:mb-0 lg:mr-4">
-            <select
-              value={sortingOrder}
-              onChange={handleSortingChange}
-              className="px-4 py-2 border rounded-md"
-            >
-              <option value="">Sort by price</option>
-              <option value="lowToHigh">Low to High</option>
-              <option value="highToLow">High to Low</option>
-            </select>
-          </span>
-
-          {/* Category filter dropdown */}
-          <span className="m-2 lg:mb-0 lg:mr-4">
-            <select
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              className="px-4 py-2 border rounded-md"
-            >
-              <option value="All">All Categories</option>
-              {categoryOptions.map((category, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </span>
-        </div>
-
-        {/* Rating filter */}
-        <div className="mt-2 flex justify-center">
-          <label>Rating: </label>
-          <label>
-            <input
-              type="radio"
-              value="All"
-              checked={selectedRating === "All"}
-              onChange={handleRatingChange}
-            />
-            All
-          </label>
-          {ratingOptions.map((rating, index) => (
-            <label key={index}>
-              <input
-                type="radio"
-                value={rating}
-                checked={selectedRating == rating}
-                onChange={handleRatingChange}
-                className="ml-2"
-              />
-              {rating}
-            </label>
-          ))}
-        </div>
+        {/* Use the ProductFilters component */}
+        <ProductFilters
+          searchQuery={searchQuery}
+          selectedColor={selectedColor}
+          selectedRating={selectedRating}
+          sortingOrder={sortingOrder}
+          selectedCategory={selectedCategory}
+          handleSearchChange={handleSearchChange}
+          handleColorChange={handleColorChange}
+          handleRatingChange={handleRatingChange}
+          handleSortingChange={handleSortingChange}
+          handleCategoryChange={handleCategoryChange}
+          colorOptions={colorOptions}
+          ratingOptions={ratingOptions}
+          categoryOptions={categoryOptions}
+        />
       </div>
 
       <Grid container spacing={4}>
         {slicedData.map((item, index) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-            <div className="shadow-lg shadow-slate-500 hover:shadow-blue-500 rounded-lg p-4">
-              <div className="mx-auto flex justify-center">
-                <img src={item.img} alt={item.title} className="w-auto h-40" />
+            <Link to={`/products/${item.id}`}>
+              <div className="shadow-lg shadow-slate-500 hover:shadow-blue-800 rounded-md">
+                <div className="bg-white mx-auto p-4 flex justify-center rounded-md">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-auto h-40"
+                  />
+                </div>
+                <div className="bg-gray-200 p-4">
+                  <Typography variant="h6" className="mt-2">
+                    {item.title}
+                  </Typography>
+                  <div className="flex items-center mt-2">
+                    {item.rating} <AiFillStar color="orange" />
+                    <p className="text-gray-600 ml-2">{item.reviews}</p>
+                  </div>
+                  <div className="flex justify-between mt-2 text-xl ">
+                    <p>
+                      <span class="text-2xl font-bold text-slate-900">
+                        $249
+                      </span>
+                      <span class="text-sm text-slate-900 line-through">
+                        $299
+                      </span>
+                    </p>
+                    <button
+                      onClick={() => addToCart(item.id)}
+                      className="flex items-center rounded-md bg-slate-800 mr-2 px-4 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                    >
+                      Add to cart
+                      <AiOutlineShoppingCart className="ml-2" size={20} />
+                    </button>
+                  </div>
+                </div>
               </div>
-              <Typography variant="h6" className="mt-2">
-                {item.title}
-              </Typography>
-              <div className="flex items-center mt-2">
-                {item.rating} <AiFillStar color="orange" />
-                <p className="text-gray-600 ml-2">{item.reviews}</p>
-              </div>
-              <div className="flex justify-start mt-2">
-                <p className=" font-semibold mr-2">${item.newPrice}</p>
-                <p className=" text-gray-500 line-through">{item.prevPrice}</p>
-              </div>
-              <p className="text-gray-700 mt-2">Company: {item.company}</p>
-              <p className="text-gray-700">Color: {item.color}</p>
-              <p className="text-gray-700">Category: {item.category}</p>
-            </div>
+            </Link>
           </Grid>
         ))}
       </Grid>
@@ -206,7 +161,7 @@ const Products = () => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
         labelRowsPerPage="Items per page:"
-        className="flex justify-center bg-blue-200 rounded-full mt-8"
+        className="bg-opacity-60 backdrop-blur-lg flex justify-center bg-blue-200 rounded-full mt-8"
       />
     </div>
   );
