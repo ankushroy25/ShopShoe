@@ -14,6 +14,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ShopContextProvider } from "./context/ShopContext.jsx";
 import OrderConfirm from "./components/OrderConfirm.jsx";
 import About from "./pages/About.jsx";
+import Profile from "./pages/Profile.jsx";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/order-confirm" element={<OrderConfirm />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
             <Footer />
           </Router>
