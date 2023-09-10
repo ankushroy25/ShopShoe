@@ -3,7 +3,7 @@
 E-commerce website using React with essential features including authentication, product listing, cart management and checkout.
 <br/> ~Totality Corps Frontend Assignment
 
-![](https://github.com/ankushroy25/briefit/blob/main/public/preview.png)
+![](https://github.com/ankushroy25/totalitycorp-frontend-challenge/blob/main/client/public/preview.png)
 
 ## 🔗 Links
 The app is live at - https://totalitycorp-frontend-challenge-36sl20tdn-ankushroy25.vercel.app/ 
@@ -15,6 +15,8 @@ The app is live at - https://totalitycorp-frontend-challenge-36sl20tdn-ankushroy
 - **Checkout :**  A checkout process that calculates the total cost of items in the cart. Allow users to enter shipping information and payment details. 
 - **Responsive Design :** Website is responsive and works seamlessly on both desktop and mobile devices. 
 - **User Authentication :**  Provide user registration and login functionalities. Display the user's name and avatar when logged in. 
+
+![](https://github.com/ankushroy25/totalitycorp-frontend-challenge/blob/main/client/public/Screenshot%202023-09-10%20212412.png)
 
 ### NOTE: Since this was a frontend challenge I did not use any backend technologies, otherwise, 
 - The product fetching should be done with a database and API endpoints which would eiliminate redundant importing.
