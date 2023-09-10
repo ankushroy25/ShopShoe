@@ -8,7 +8,7 @@ const Banner = () => {
         <section className=" text-center">
           <div className="py-12 md:px-12">
             <div className="container mx-auto xl:px-32">
-              <div className="flex items-center lg:grid-cols-2">
+              <div className="flex flex-col md:flex-row items-center lg:grid-cols-2">
                 <div className="md:mb-12 lg:mb-0">
                   <img
                     src={shoeBanner}

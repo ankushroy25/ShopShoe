@@ -60,7 +60,7 @@ const Hero = () => {
                 role="img"
               />
             </div>
-            <div className="w-6/12 xl:w-1/4 lg:w-1/4 md:w-1/4 flex justify-center xl:pt-10 lg:pt-10 md:pt-2 pt-16">
+            <div className="w-6/12 xl:w-1/4 lg:w-1/4 md:w-1/4 flex justify-center xl:pt-10 lg:pt-10 md:pt-2 py-8">
               <img
                 tabIndex="0"
                 className="focus:outline-none"
@@ -69,7 +69,7 @@ const Hero = () => {
                 role="img"
               />
             </div>
-            <div className="w-6/12 xl:w-1/4 lg:w-1/4 md:w-1/4 flex justify-center  xl:pt-10 lg:pt-10 md:pt-2 pt-16">
+            <div className="w-6/12 xl:w-1/4 lg:w-1/4 md:w-1/4 flex justify-center  xl:pt-10 lg:pt-10 md:pt-2 py-8">
               <img
                 tabIndex="0"
                 className="focus:outline-none"
