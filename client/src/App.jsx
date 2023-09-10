@@ -5,12 +5,15 @@ import Homepage from "./pages/Homepage.jsx";
 import Products from "./pages/Products.jsx";
 import ProductDetail from "./pages/ProductDetail.jsx";
 import Checkout from "./pages/Checkout.jsx";
+import Contact from "./pages/Contact.jsx";
 
 import Cart from "./pages/Cart.jsx";
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ShopContextProvider } from "./context/ShopContext.jsx";
+import OrderConfirm from "./components/OrderConfirm.jsx";
+import About from "./pages/About.jsx";
 
 function App() {
   return (
@@ -22,12 +25,15 @@ function App() {
 
             <Routes>
               <Route path="/" element={<Homepage />} />
+
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductDetail />} />
 
               <Route path="/cart" element={<Cart />} />
-              <Route path="/about" />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/order-confirm" element={<OrderConfirm />} />
             </Routes>
             <Footer />
           </Router>

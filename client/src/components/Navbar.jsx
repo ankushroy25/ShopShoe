@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,12 +13,15 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { RiAccountCircleFill, RiShoppingCart2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
-
-const settings = ["Profile", "Logout"];
+import { useAuth0 } from "@auth0/auth0-react";
+import { ShopContext } from "../context/ShopContext.jsx";
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+  const { totalCartItems } = useContext(ShopContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -34,6 +37,7 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  console.log(isAuthenticated);
 
   return (
     <AppBar position="static">
@@ -41,10 +45,16 @@ function Navbar() {
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Link to="/">
-            <Typography variant="h5" noWrap component="div">
+            <Typography
+              className="hidden md:block"
+              variant="h5"
+              noWrap
+              component="div"
+            >
               ShopShoe
             </Typography>
           </Link>
+          {/* for mobile devices */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -56,6 +66,9 @@ function Navbar() {
             >
               <MenuIcon />
             </IconButton>
+            <Typography className="pt-2" variant="h5" noWrap component="div">
+              ShopShoe
+            </Typography>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -86,26 +99,6 @@ function Navbar() {
               </Link>
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Link to="/">
-            <Typography
-              variant="h5"
-              noWrap
-              component="div"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              ShopShoe
-            </Typography>
-          </Link>
           <Box
             className="flex justify-center"
             sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
@@ -128,41 +121,58 @@ function Navbar() {
             </Link>
           </Box>
           <Link to="/cart">
-            <IconButton>
+            ({totalCartItems()})
+            <IconButton className="">
               <span className="mr-2">
                 <RiShoppingCart2Line size={40} color="white" />
               </span>
             </IconButton>
           </Link>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <RiAccountCircleFill size={40} color="white" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+          {isAuthenticated ? (
+            <>
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <RiAccountCircleFill size={40} color="white" />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">Profile</Typography>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => logout({ returnTo: window.location.origin })}
+                  >
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
+                </Menu>
+              </Box>
+            </>
+          ) : (
+            <button
+              onClick={() => {
+                loginWithRedirect();
               }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+              className="px-4 py-2 hover:bg-pink-800 rounded-md border-2 border-white"
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+              <b> LOGIN</b>
+            </button>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

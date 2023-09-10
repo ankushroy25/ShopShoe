@@ -5,10 +5,14 @@ import CartItem from "../components/CartItem.jsx";
 import { Link } from "react-router-dom";
 import { TbMoodEmpty } from "react-icons/tb";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Alert } from "@mui/material";
 
 const Cart = () => {
   const { cartItems, getTotalCartAmount } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
+  const { isAuthenticated } = useAuth0();
+
   return (
     <div className="min-h-screen">
       <p className="mt-8 text-2xl font-bold text-center"> Your Cart Items</p>
@@ -29,14 +33,22 @@ const Cart = () => {
           <div>
             <div className="p-8 m-16 rounded-lg bg-white">
               <p className="font-semibold text-xl">Total : {totalAmount}</p>
-              <div className="flex flex-row mt-4">
-                <p className="font-semibold text-xl mr-4">
-                  Proceed to <br /> Checkout{" "}
-                </p>
-                <Link to="/checkout">
-                  <BsFillArrowRightCircleFill className="mt-4" size={30} />
-                </Link>
-              </div>
+
+              {isAuthenticated ? (
+                <div className="flex flex-row mt-4">
+                  <p className="font-semibold text-xl mr-4">
+                    Proceed to <br /> Checkout{" "}
+                  </p>
+
+                  <Link to="/checkout">
+                    <BsFillArrowRightCircleFill className="mt-4" size={30} />
+                  </Link>
+                </div>
+              ) : (
+                <Alert className="mt-4" severity="error">
+                  Login to order items
+                </Alert>
+              )}
             </div>
           </div>
         </div>

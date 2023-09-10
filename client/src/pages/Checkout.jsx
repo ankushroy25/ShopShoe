@@ -5,9 +5,11 @@ import OrderConfirm from "../components/OrderConfirm.jsx";
 import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
-  const { cartItems } = useContext(ShopContext);
+  const { cartItems, getTotalCartAmount } = useContext(ShopContext);
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
+  const totalAmount = getTotalCartAmount();
+  const shippingAmount = 10;
 
   const handlePlaceOrderClick = () => {
     const orderPlacedSuccessfully = true;
@@ -16,6 +18,7 @@ const Checkout = () => {
       setShowAlert(true);
       navigate("/order-confirm");
     }
+    window.location.reload();
   };
   return (
     <div>
@@ -156,7 +159,7 @@ const Checkout = () => {
             </div>
           </div>
         </div>
-        <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
+        <div className="my-16 bg-gray-50 px-4 py-8 lg:mt-0">
           <form action="submit" method="get">
             <p className="text-xl font-medium">Payment Details</p>
             <p className="text-gray-400">
@@ -171,6 +174,7 @@ const Checkout = () => {
               </label>
               <div className="relative">
                 <input
+                  required="email"
                   type="text"
                   id="email"
                   name="email"
@@ -277,6 +281,7 @@ const Checkout = () => {
                 <div className="relative flex-shrink-0 sm:w-7/12">
                   <input
                     type="text"
+                    required="text"
                     id="billing-address"
                     name="billing-address"
                     className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
@@ -308,16 +313,20 @@ const Checkout = () => {
               <div className="mt-6 border-t border-b py-2">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-gray-900">Subtotal</p>
-                  <p className="font-semibold text-gray-900">$399.00</p>
+                  <p className="font-semibold text-gray-900">${totalAmount}</p>
                 </div>
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-gray-900">Shipping</p>
-                  <p className="font-semibold text-gray-900">$8.00</p>
+                  <p className="font-semibold text-gray-900">
+                    ${shippingAmount}
+                  </p>
                 </div>
               </div>
               <div className="mt-6 flex items-center justify-between">
                 <p className="text-sm font-medium text-gray-900">Total</p>
-                <p className="text-2xl font-semibold text-gray-900">$408.00</p>
+                <p className="text-2xl font-semibold text-gray-900">
+                  ${totalAmount + shippingAmount}
+                </p>
               </div>
             </div>
             <button
