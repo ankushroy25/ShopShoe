@@ -5,7 +5,7 @@ E-commerce website using React with essential features including authentication,
 ![](https://github.com/ankushroy25/totalitycorp-frontend-challenge/blob/main/client/public/preview.png)
 
 ## 🔗 Links
-The app is live at - https://totalitycorp-frontend-challenge-36sl20tdn-ankushroy25.vercel.app/ 
+The app is live at - https://shopshoe-ankushroy25.vercel.app/
 
 ## Features
 - **Product Listing :** Display a variety of products with images, names, prices, and "Add to Cart" buttons. Implement filters to allow users to sort products by category, price range, or ratings. 
@@ -15,7 +15,7 @@ The app is live at - https://totalitycorp-frontend-challenge-36sl20tdn-ankushroy
 - **Responsive Design :** Website is responsive and works seamlessly on both desktop and mobile devices. 
 - **User Authentication :**  Provide user registration and login functionalities. Display the user's name and avatar when logged in. 
 
-![](https://github.com/ankushroy25/totalitycorp-frontend-challenge/blob/main/client/public/Screenshot%202023-09-10%20212412.png)
+![](https://github.com/ankushroy25/ShopShoe/blob/main/client/public/Screenshot%202023-09-10%20212412.png)
 
 ### NOTE: Since this is a frontend project I did not use any backend technologies, otherwise, 
 - The product fetching should be done with a database and API endpoints which would eiliminate redundant importing.
