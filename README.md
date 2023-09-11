@@ -1,7 +1,6 @@
 # ShopShoe
 
 E-commerce website using React with essential features including authentication, product listing, cart management and checkout.
-<br/> ~Totality Corps Frontend Assignment
 
 ![](https://github.com/ankushroy25/totalitycorp-frontend-challenge/blob/main/client/public/preview.png)
 
@@ -18,7 +17,7 @@ The app is live at - https://totalitycorp-frontend-challenge-36sl20tdn-ankushroy
 
 ![](https://github.com/ankushroy25/totalitycorp-frontend-challenge/blob/main/client/public/Screenshot%202023-09-10%20212412.png)
 
-### NOTE: Since this was a frontend challenge I did not use any backend technologies, otherwise, 
+### NOTE: Since this is a frontend project I did not use any backend technologies, otherwise, 
 - The product fetching should be done with a database and API endpoints which would eiliminate redundant importing.
 - Stripe integration requires a server for origin session request which is therefore not done here.
 
